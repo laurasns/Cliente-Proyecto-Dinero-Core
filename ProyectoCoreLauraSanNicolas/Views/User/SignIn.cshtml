@@ -1,0 +1,43 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models.ViewModels
+@{
+    ViewBag.Title = "SignIn";
+    String conexion = ViewBag.Conectado;
+    String usuario = ViewBag.User;
+
+    string containerClass = (ViewBag.Error != null) ? "logDivContainerError" : "logDivContainer";
+}
+<br />
+
+<h2 class="title">Accede a tu Cuenta</h2>
+<br />
+@Html.Raw(TempData["msg"])
+<div class="@containerClass">
+    <div class="logDiv">
+        <form method="post" class="form-group divContent">
+            <div class="inputDiv">
+                <label class="logLabel">Usuario</label>
+                <div>
+                    <input type="text" class="form-group inputLog" required name="Username" placeholder="Introduce tu usuario o tu email"/>
+                </div>
+            </div>
+            <div class="inputDiv">
+                <label class="logLabel">Contraseña</label>
+                <div>
+                    <input type="password" class="form-group inputLog" required name="Password" placeholder="Introduce tu contraseña"/>
+                </div>
+            </div>
+            <br />
+            <div class="buttonDiv">
+                <button type="submit" class="btn button btnLog">Acceder</button>
+            </div>
+        </form>
+        <h5 style="color:red; text-align:center">@ViewBag.Error</h5>
+    </div>
+</div>
+
+<h4 style="text-align:center; color:goldenrod">¿Todavía no tienes una cuenta?</h4>
+<br />
+<div class="buttonDiv">
+    @Html.ActionLink("Regístrate", "SignUp", null, new { @class = "btn button btnLog" })
+</div>
+

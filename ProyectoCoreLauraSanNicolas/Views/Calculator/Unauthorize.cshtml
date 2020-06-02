@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Unauthorize";
+}
+<br />
+<center>
+    <h2 class="title">Acceso No Autorizado</h2>
+    <br />
+    <div class="unauthorizedDivContainer">
+        <div class="unauthorizedDiv">
+            <div>
+                <h5>Para poder visualizar el contenido de la página tienes que acceder con tu usuario.</h5>
+            </div>
+            <br />
+            <div class="buttonDiv">
+                @Html.ActionLink("Acceder", "SignIn", "User", null, new { @class = "btn button" })
+            </div>
+            <br />
+        </div>
+    </div>
+    <div>
+        <h4 style="text-align:center; color:goldenrod">¿Todavía no tienes una cuenta?</h4>
+    </div>
+    <br />
+    <div class="buttonDiv">
+        @Html.ActionLink("Regístrate", "SignUp", "User", null, new { @class = "btn button" })
+    </div>
+</center>
+
+

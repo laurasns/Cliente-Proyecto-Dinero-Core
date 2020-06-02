@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Dinero</title>
+    <environment include="Development">
+        <link href="~/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/carousel.css" rel="stylesheet" />
+        <link href="~/css/Site.css" rel="stylesheet" />
+        <link href="~/css/sweetalert2.min.css" rel="stylesheet" />
+        <link href="~/css/cookiealert.css" rel="stylesheet" />
+    </environment>
+    <environment include="Development">
+        <script src="~/js/jquery-3.4.1.js"></script>
+        <script src="~/js/sweetalert2.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/cookiealert.js"></script>
+    </environment>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark navegador fixed-top" style="">
+            <a class="nav-item" href="@Url.Action("Home", "Home")" title="Logo">
+                <img alt="Logo" src="@Url.Content("~/Images/logo.png")" height="45" width="45" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Home", "Home")">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color:white" href="#">Bolsa</a>
+                        <div class="dropdown-menu" id="dropdownContent">
+                            <a class="dropdown-item border-bottom" id="dropdownContent" href="@Url.Action("RawMaterials", "Product")">Materias Primas</a>
+                            <a class="dropdown-item border-bottom" id="dropdownContent" href="@Url.Action("StockExchange", "Product")">Bolsa de Valores</a>
+                            <a class="dropdown-item" id="dropdownContent" href="@Url.Action("Forex", "Product")">Forex</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="@Url.Action("Calculator", "Calculator")">Calculadora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="@Url.Action("Resources", "Resource")">Recursos</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mt-1">
+                    <li class="nav-item">
+                        @if (Context.User.Identity.IsAuthenticated == false)
+                        {
+                            <a href="@Url.Action("SignIn", "User")" title="Acceder" class="nav-link">
+                                <img alt="SignIn" src="@Url.Content("~/Images/person-icon-white.png")" height="45" width="45" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="@Url.Action("UserInformation", "User")" title="Información Usuario" style="display:inline">
+                                <img alt="UserInformation" src="@Url.Content("~/Images/EditUser.png")" height="35" width="35" />
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Logout", "User")" title="Cerrar Sesión" style="display:inline">
+                                <img alt="UserInformation" src="@Url.Content("~/Images/Logout.png")" height="35" width="35" />
+                            </a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <br />
+    <main role="main">
+        @RenderBody()
+    </main>
+    <footer id="foot">
+        @RenderSection("Foot", required: false)
+        <p>&copy; 2019-2020 Dinero &middot; <a href="@Url.Action("Privacy", "Home")">Privacy</a> &middot; <a href="@Url.Action("Terms", "Home")">Terms</a></p>
+        <partial name="_CookiesConsent" />
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

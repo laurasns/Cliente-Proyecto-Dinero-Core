@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+}
+    <br/>
+    <h2 class="title">Error</h2>
+    <br />
+    <div class="errorDivContainer">
+        <div class="errorDiv">
+            <div>
+                <h5>¡Ups! Ha habido un error al procesar tu petición, intentalo de nuevo más tarde.</h5>
+                <br/>
+                <div>
+                    <img src="~/images/babyyoda1.gif" alt="No se ha podido procesar la petición" />
+                </div>
+            </div>
+            <br/>
+            <br />
+            <div class="buttonDiv">
+                @Html.ActionLink("Volver a la página principal", "Home", "Home", null, new { @class = "btn button" })
+            </div>
+            <br />
+        </div>
+    </div>

@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "FinancialFreedom";
+}
+
+@section scripts{
+    <script>
+
+        function setFormValues() {
+            var inf = $("#inf").val();
+            var prof = $("#prof").val();
+            $("#infResult").html(inf.toString() + '%');
+            $("#profResult").html(prof.toString() + '%');
+        }
+
+        $(document).ready(function () {
+            setFormValues();
+        });
+
+        $("input[type=range]").change(function () {
+            setFormValues();
+        });
+    </script>
+    @if (TempData["emailSentMessage"] != null)
+    {
+        <script>
+            var message = "@(TempData["emailSentMessage"].ToString())";
+            if (message == "OK") {
+                Swal.fire(
+                        '¡Perfecto!',
+                        '¡El email se ha enviado!',
+                        'success'
+                        )
+            }
+            else
+            {
+                Swal.fire(
+                        'Error',
+                        'Ups! Ha habido un problema y el email no ha podido enviarse',
+                        'danger'
+                        )
+            }
+
+        </script>
+    }
+
+}
+
+<br />
+<h2 class="title">Calculadora de Libertad Financiera</h2>
+<br />
+<div>
+    <div class="div">
+        <img src="~/Images/Start.jpg" width="500" height="200" /><br /><br />
+        <h6>Cumplimenta los datos de la calculadora para conocer cuánto dinero necesitarías para ser libre financieramente.</h6>
+        <br />
+    </div>
+    @using (Html.BeginForm("FinancialFreedom", "Calculator", FormMethod.Post))
+    {
+        <div class="div">
+            <div class="row div justify-content-lg-center">
+                <div class="col-lg-2">
+                    <label>Edad: </label>
+                    <input type="number" name="age" required placeholder="Ej: 25" />
+                    <br />
+                    <label>Gasto anual: </label>
+                    <input type="number" name="expense" required placeholder="Ej: 12000" />
+                    <br />
+                    <label>Ingresos anuales: </label>
+                    <input type="number" name="saving" required placeholder="Ej: 24000" />
+                </div>
+                <div class="col-lg-2">
+                    <div class="md-form form-group">
+                        <label>Ahorros actuales: </label>
+                        <input type="number" name="currentMoney" required placeholder="Ej: 2000" />
+                        <br />
+                        <label>Inflación anual: </label><br />
+                        <input type="range" id="inf" name="inflation" min="0" max="12" value="2" step="0.1" required />&nbsp&nbsp&nbsp<a id="infResult"></a>
+                        <br />
+                        <label>Rentabilidad anual:</label><br />
+                        <input type="range" id="prof" name="profitability" min="0" max="12" value="4" step="0.1" required />&nbsp&nbsp&nbsp<a id="profResult"></a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="button">Calcular</button>
+        </div>
+    }
+</div>
+<hr />
+@if (ViewBag.Liberty != null)
+{
+    <div class="div divResult">
+        <p>@ViewBag.Liberty</p>
+        <p>@ViewBag.SavingYears</p>
+        <p>@ViewBag.Capital</p>
+    </div>
+    <div class="buttonDiv">
+        @Html.ActionLink("Envíame el resultado", "SendMail", "Calculator", null, new { @class = "btn button" })
+    </div>    
+}

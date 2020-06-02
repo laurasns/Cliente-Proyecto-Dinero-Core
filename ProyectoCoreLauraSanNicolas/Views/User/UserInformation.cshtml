@@ -1,0 +1,92 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models.ViewModels
+@model UserVMO
+@{
+    ViewBag.Title = "UserInformation";
+}
+
+@section scripts{
+    <script>
+
+        $("#deleteUser").click(function () {
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Si eliminas la cuenta, no podrás deshacer la acción ni volver a acceder a nuestros servicios.",
+                icon: "warning",
+                showConfirmButton: true,
+                showCancelButton: true,
+                dangerMode: true,
+                closeonCancel: true,
+            }).then((willDelete) => {
+                    if (willDelete.value) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteUser", "User",new { id = Model.Id})',
+                            success: function (data) {
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "Tu cuenta ha sido eliminada."
+                                }).then(function () {
+                                    location.href = "@Url.Action("Logout")";
+                                });
+                            }, error: function (data) {
+                                Swal.fire({
+                                    text: "Ha habido un error borrando tu cuenta."
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+    @if (TempData["edited"] != null)
+    {
+        <script>
+            var message = "@(TempData["edited"].ToString())";
+            if (message == "OK") {
+                Swal.fire(
+                        '¡Perfecto!',
+                        '¡Se han guardado tus nuevos datos!',
+                        'success'
+                        )
+            }
+        </script>
+    }
+    }
+
+    <br />
+    <h2 class="title">Información del Usuario</h2>
+    <br />
+    <br />
+    <div class="regDivContainer">
+        <div class="regDiv">
+            <form method="post" class="form-group divContent">
+                <div class="inputDiv">
+                    <label class="logLabel">Usuario</label>
+                    <input type="text" class="form-group inputLog" required name="Username" readonly value="@Model.Username" />
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Email</label>
+                    <input type="email" class="form-group inputLog" required name="Email" value="@Model.Email" />
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Nombre</label>
+                    <input type="text" class="form-group inputLog" required name="Name" value="@Model.Name" />
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Apellidos</label>
+                    <input type="text" class="form-group inputLog" required name="Surname" value="@Model.Surname" />
+                </div>
+                <br />
+                <div class="buttonDiv">
+                    <button type="submit" class="btn button">Actualizar Información</button>
+                </div>
+                <br />
+                <div class="buttonDiv">
+                    <button id="deleteUser" type="button" class="btn btnDanger">Borrar cuenta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Foot{
+        @Html.ActionLink("Volver a la Página Principal", "Home", "Home")
+    }

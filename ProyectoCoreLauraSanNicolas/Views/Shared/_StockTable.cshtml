@@ -1,0 +1,121 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+@*Datos del Producto Seleccionado*@
+<br />
+<br />
+
+<div id="infoContainer">
+    <div id="infoRow">
+        <span id="displayInfo">Anterior</span>
+        <br />
+        <span id="previous"></span>
+    </div>
+    <div id="infoRow">
+        <span id="displayInfo">Último</span>
+        <br />
+        <span id="lastPrice"></span>
+    </div>
+    <div id="infoRow">
+        <span id="displayInfo">Diferencia</span>
+        <br />
+        <span id="difference"></span>
+    </div>
+    <div id="infoRow">
+        <span id="displayInfo">Máximo</span>
+        <br />
+        <span id="maxBuyPrice"></span>
+    </div>
+    <div id="infoRow">
+        <span id="displayInfo">Mínimo</span>
+        <br />
+        <span id="minBuyPrice"></span>
+    </div>
+    <div id="infoRow">
+        <span id="displayInfo">Medio</span>
+        <br />
+        <span id="avgBuyPrice"></span>
+    </div>
+</div>
+<hr />
+<div id="stockChartContainer">
+    <canvas id="stockChart"></canvas>
+</div>
+
+
+<script>
+    function loadData() {
+        var productDropdown = document.getElementById("products");
+        var symbol = productDropdown.options[productDropdown.selectedIndex].value;
+        var suma = 0;
+        $.getJSON("@Url.Action("GetStockChartData","Product")?symbol=" + symbol, {}, function (data) {
+
+            var dates = Object.keys(data);
+            var keys = [];
+            var values = [];
+
+            for (var d of dates) {
+
+                var split = d.split("-");
+                var spanishDate = split[2] + "/" + split[1] + "/" + split[0];
+
+                keys.push(spanishDate);
+                values.push(data[d]);
+            }
+            var max = Math.max.apply(null, values);
+            var min = Math.min.apply(null, values);
+            for (var i = 0; i < values.length; i++) {
+                suma += parseFloat(values[i]);
+            }
+            var avg = suma / values.length;
+            var average = avg.toFixed(2);
+            var ctx = document.getElementById('stockChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: keys.reverse(),
+                    datasets: [{
+                        label: symbol,
+                        backgroundColor: 'rgb(255, 204, 230)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        data: values.reverse()
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    responsive: true,
+                    maintainAspectRatio:false
+                }
+            });
+            var latestValue = values.slice(-1)[0];
+            var previousValue = values.slice(-2)[0];
+            var calcDifference = ((latestValue - previousValue) / previousValue) * 100;
+            var difference = calcDifference.toFixed(2) + "%";
+
+            document.getElementById("maxBuyPrice").innerText = max;
+            document.getElementById("minBuyPrice").innerText = min;
+            document.getElementById("avgBuyPrice").innerText = average;
+            document.getElementById("lastPrice").innerText = latestValue;
+            document.getElementById("lastPrice").da = latestValue;
+            document.getElementById("previous").innerText = previousValue;
+            if (latestValue > previousValue) {
+                document.getElementById("difference").innerHTML = "<img src='../../Images/greenPoint.jpg' style='width:10px; height: 10px'/>"+"<span style='color: green;'>" + "+" + difference + "</span>";
+            } else {
+                document.getElementById("difference").innerHTML = "<img src='../../Images/redPoint.jpg' style='width:10px; height: 10px'/>"+"<span style='color: red;'>" + difference + "</span>";
+
+            }
+        });
+
+    }
+
+    $(document).ready(function() {
+        loadData();
+    });
+    $("#products").on("change", function() {
+        loadData();
+    });
+</script>

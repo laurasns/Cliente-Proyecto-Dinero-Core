@@ -1,0 +1,24 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models
+@model List<Product>
+@{
+    ViewBag.Title = "StockExchange";
+}
+<br />
+<h2 class="title">Bolsa de Valores</h2>
+<br />
+<div class="div">
+    <form method="post" class="divContent">
+        <h6 class="rawMaterialForm">Escoge la bolsa de valores que quieras ver:</h6>
+        <div class="select">
+            <select id="products">
+                @foreach (Product prod in Model)
+                {
+                    <option value="@prod.Code">@prod.Name</option>
+                }
+            </select>
+        </div>        
+    </form>
+</div>
+<partial name="_StockTable" />
+
+

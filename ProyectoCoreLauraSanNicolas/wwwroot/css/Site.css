@@ -1,0 +1,461 @@
+﻿body {
+    padding-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+}
+
+.button {
+    background-color: darkgoldenrod;
+    color: white;
+    border-radius: .5rem;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.btnDanger {
+    background-color: darkred;
+    color: white;
+}
+
+.btnLog {
+    width: 150px;
+}
+
+.buttonDiv {
+    padding-top: 5px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: initial;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-align: center;
+}
+
+.homeButton {
+    margin-top: 4rem;
+}
+
+a {
+    font-size: large;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+}
+
+    select::-ms-expand {
+        display: none;
+    }
+
+.select {
+    position: relative;
+    display: inline-flex;
+    width: 16em;
+    height: 3em;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+select {
+    border: 1px solid silver !important;
+    flex: 1;
+    padding: 0 .5em;
+    color: black;
+    cursor: pointer;
+}
+
+.select::after {
+    content: '\25bc';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+    color: goldenrod;
+}
+
+.comeBack {
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: initial;
+    font-size: small;
+}
+
+    .comeBack > a {
+        font-size: small;
+    }
+
+.div > table {
+    margin-left: 10rem;
+    margin-right: 10rem;
+    width: auto;
+}
+
+.button:hover {
+    background-color: silver;
+}
+
+.image {
+    width: 60px;
+    height: 100px;
+}
+
+    .image:hover {
+        width: 200px;
+        height: 300px;
+    }
+
+#foot {
+    position: static;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    padding-top: 16px;
+    max-height: 20px; /*antes 20 vh*/
+}
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: left;
+}
+
+.logLabel {
+    color: var(--text-color,#666);
+    display: block;
+    font-weight: 500;
+    padding: .5rem 0;
+}
+
+    .logLabel::after {
+        color: #c30e2e;
+        content: "*";
+        display: inline-block;
+        margin-left: 3px;
+    }
+
+.unmaskLabel {
+    float: left;
+}
+
+.togglePassword {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+}
+
+.spanPass {
+    position: relative;
+    top: 6px;
+}
+
+.imgShowPass {
+    position: relative;
+    top: 4px;
+}
+
+.invalid {
+    color: red;
+}
+
+    .invalid:before {
+        position: relative;
+        left: -35px;
+        content: "&#10006;";
+    }
+
+.title {
+    text-align: center;
+    color: darkgoldenrod;
+}
+
+.div {
+    position: center;
+    text-align: center;
+    font-size: medium;
+}
+
+.logDivContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 58rem;
+    max-height: 24rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+.logDivContainerError {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 58rem;
+    max-height: 25rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+.logDiv {
+    margin: 1em auto;
+    max-width: 46rem;
+    /*max-height: calc(100vh - 31.3rem);*/
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.regDivContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 58rem;
+    min-height: calc(100vh - 22.4rem);
+    background: #fff;
+    background: var(--panel-background-color,#fff);
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+.regDiv {
+    margin: 1em auto;
+    max-width: 46rem;
+    min-height: calc(100vh - 31.3rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.unauthorizedDiv {
+    margin: 3.5em auto;
+    max-width: 48rem;
+    min-height: 10rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.unauthorizedDivContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 50rem;
+    max-height: 15rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+.errorDiv {
+    margin: 1.5em auto;
+    max-width: 48rem;
+    min-height: 10rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+}
+
+.errorDivContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 50rem;
+    max-height: 37.5rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+.tableDivContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 80rem;
+    min-height: calc(100vh - 22.4rem);
+    border-radius: .5rem;
+    overflow-x:auto;
+}
+
+.divResult {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 45rem;
+    min-height: auto;
+    background: #fff;
+    background: var(--panel-background-color,#fff);
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+    background-color: palegoldenrod;
+    color: black;
+    border: 5px solid goldenrod;
+    text-align: center;
+}
+
+.freedom {
+    width: 100%;
+}
+
+.freedomResult {
+    width: 100%;
+    border: 5px solid;
+    background-color: palegoldenrod;
+    border-color: goldenrod;
+}
+
+.col-centeredleft {
+    margin: 0 auto;
+    position: relative;
+    padding-left: 20px;
+}
+
+.col-centeredright {
+    margin: 0 auto;
+    position: relative;
+    padding-right: 50px;
+}
+
+.divContent {
+    /*vertical-align: middle;*/
+    font-size: 18px;
+}
+
+.inputDiv {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: initial;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-align: inherit;
+}
+
+.inputLog {
+    border: 1px solid silver;
+    border-radius: 9px;
+    color: #666;
+    color: var(--text-color,darkgoldenrod);
+    font-weight: 300;
+    height: 3.4rem;
+    padding: .75rem;
+    width: 100%;
+}
+
+div > h2 {
+    color: darkgoldenrod;
+}
+
+div > label {
+    font-weight: bold;
+}
+
+.rawMaterialForm {
+    color: black;
+    font: inherit;
+}
+
+.navegador {
+    background-color: darkgoldenrod;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.left {
+    float: left;
+    width: 50%;
+}
+
+.right {
+    float: right;
+    width: 50%;
+}
+
+#dropdownContent {
+    background-color: darkgoldenrod;
+    color: white;
+}
+
+#slideTitle {
+    color: darkgoldenrod;
+}
+
+#slideContent {
+    color: black;
+}
+
+#stockChartContainer {
+    position: relative;
+    left: 10vw;
+    height: 40vh;
+    width: 80vw;
+}
+
+#pricesContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 58rem;
+    max-height: 24rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+}
+
+#infoContainer {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 58rem;
+    max-height: 24rem;
+    box-shadow: 0 0 7px rgba(0,0,0,.35);
+    border-radius: .5rem;
+    position: relative;
+    align-items: center;
+    text-align: center;
+}
+
+#infoRow {
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#displayInfo {
+    color: black;
+    font-weight: 600;
+}
+
+#pricesTable {
+    position: relative;
+    left: 10vw;
+    width: 80vw;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+    border-radius: 5px;
+    border-color: palegoldenrod;
+}
+
+main {
+    min-height: 80vh;
+}

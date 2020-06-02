@@ -1,0 +1,61 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models
+@using PagedList
+@using Microsoft.WindowsAzure.Storage.Blob
+@using System.IO
+@model IPagedList<Resource>
+@{
+    ViewBag.Title = "Resources";
+    string type = "";
+}
+<br />
+<h2 class="title">Recursos</h2>
+<br />
+<div class="tableDivContainer">
+    <table class="table table-hover tablem">
+        <tr>
+            <th>TIPO</th>
+            <th>TITULO</th>
+            <th>AUTOR</th>
+            <th>DESCRIPCION</th>
+            <th>IMAGEN</th>
+        </tr>
+        @foreach (Resource res in Model)
+        {
+            string blobUrl = ViewData["containerUri"] + "/" + res.Image;
+            if (res.Type == "BOOK")
+            {
+                type = "Libro";
+            }
+            else if (res.Type == "DOCUMENTARY")
+            {
+                type = "Documental";
+            }
+            else
+            {
+                type = "Pelicula";
+            }
+
+            <tr>
+                <td>@type</td>
+                <td>@res.Name</td>
+                <td>@res.Author</td>
+                <td>@res.Description</td>
+                <td><a target="_blank" href="@res.Url"><img class="image" src="@blobUrl" /></a></td>
+            </tr>
+        }
+    </table>
+    <div class="buttonDiv">
+        @if (Model.HasPreviousPage)
+        {
+            <a class="previous" href="@Url.Action("Resources", new { page = Model.PageNumber -1})">Anterior</a>
+
+        }
+        @if (Model.HasNextPage)
+        {
+            <a class="next" style="margin-left:50px" href="@Url.Action("Resources", new { page = Model.PageNumber +1})">Siguiente</a>
+        }
+        <p>Página: @Model.PageNumber</p>
+    </div>
+
+</div>
+

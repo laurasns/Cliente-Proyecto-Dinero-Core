@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    ITrackingConsentFeature tracking = Context.Features.Get<ITrackingConsentFeature>();
+    bool areCookiesAccepted = false;
+    String consent = "";
+    if (tracking != null)
+    {
+        areCookiesAccepted = tracking.CanTrack;
+        consent = tracking.CreateConsentCookie();
+    }
+}
+
+@if (!areCookiesAccepted)
+{
+    <div class="alert alert-dismissible text-center cookiealert" role="alert" id="divcookies">
+        <div class="cookiealert-container">
+            <b>Aviso legal de Cookies</b> &#x1F36A; Utilizamos cookies propias para mejorar la experiencia del usuario.
+            <a asp-action="Privacy" class="nav-link" asp-controller="Home" target="_blank">
+                Leer más
+            </a>
+            <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close" id="acceptCookies" data-cookie="@consent">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var acceptCookiesBtn = document.getElementById("acceptCookies");
+        acceptCookiesBtn.addEventListener("click", function () {
+            var cookieData = this.dataset.cookie;
+            document.cookie = cookieData;
+            var cookieAlert = document.getElementById("divcookies");
+            cookieAlert.style.visibility = "hidden";
+        });
+    </script>
+}

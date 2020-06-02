@@ -1,0 +1,40 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models
+@model List<Product>
+@{
+    ViewBag.Title = "RawMaterials";
+    string name = "";
+}
+<br />
+<h2 class="title">Materias Primas</h2>
+<br />
+<div class="div">
+    <form method="post" class="divContent">
+        <h6 class="rawMaterialForm">Escoge la materia prima que quieras ver:</h6>
+        <div class="select">
+            <select id="products">
+                @foreach (Product prod in Model)
+                {
+                    if (prod.Name == "GOLD")
+                    {
+                        name = "ORO";
+                    }
+                    else if (prod.Name == "SILVER")
+                    {
+                        name = "PLATA";
+                    }
+                    else if (prod.Name == "PLATINUM")
+                    {
+                        name = "PLATINO";
+                    }
+                    else
+                    {
+                        name = "PALADIO";
+                    }
+                    <option value="@prod.Code">@name</option>
+                }
+            </select>
+        </div>      
+    </form>
+</div>
+<partial name="_StockTable" />
+

@@ -1,0 +1,79 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models.ViewModels
+
+@{
+    ViewBag.Title = "SignUp";
+
+    UserVMO userData = (ViewData["userData"] as UserVMO) ?? new UserVMO();
+}
+@section scripts{
+    <script>
+        $("#showPassword").click(function () {
+            $("#showPassword").css('display', 'none');
+            $("#hidePassword").css('display', 'inline-block');
+            $("#pass").prop('type', 'text');
+        });
+
+        $("#hidePassword").click(function () {
+            $("#hidePassword").css('display', 'none');
+            $("#showPassword").css('display', 'inline-block');
+            $("#pass").prop('type', 'password');
+        });
+    </script>
+
+}
+
+<br />
+<h2 class="title">Registro</h2>
+<br />
+<br />
+<div class="regDivContainer">
+    <div class="regDiv">
+        <div class="div divContent">
+            <form method="post" class="form-group divContent">
+                <div class="inputDiv">
+                    <label class="logLabel">Usuario</label>
+                    <div><input type="text" class="form-group inputLog" required name="Username" placeholder="Introduce un nombre de usuario" value="@userData.Username" /></div>
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Email</label>
+                    <div><input type="email" class="form-group inputLog" required name="Email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,4}$" title="Introduce un formato de email correcto. Ejemplo: 'test@@test.com'" placeholder="Introduce un email válido" value="@userData.Email" /></div>
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Nombre</label>
+                    <div>
+                        <input type="text" class="form-group inputLog" required name="Name" placeholder="Introduce tu nombre" value="@userData.Name" />
+                    </div>
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel">Apellidos</label>
+                    <div>
+                        <input type="text" class="form-group inputLog" required name="Surname" placeholder="Introduce tus apellidos" value="@userData.Surname" />
+                    </div>
+                </div>
+                <div class="inputDiv">
+                    <label class="logLabel unmaskLabel">Contraseña</label>
+                    <div class="togglePassword" id="showPassword">
+                        <img class="imgShowPass" alt="Mostrar / Ocultar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS42/U4J6AAAAZdJREFUOE/tUs1KAlEY1aII2rapVQ/Rqk0vUEt3wizC0RR0EfizEhmyRQ/QZhhaCG5EEHeB4QMMIr5AmxaKjCiGf5in8w3XUUnIB/DA4V6+75wz371zfXt4CAQCh7FY7ELX9btQKPQgjEQit1zPs9nsgZLtBD9N1wyqkeNwOAwGu5S91Nj/IG/+DdY07YTCV5rmJFKpFJrNJsbjMabTKVqtFjKZjIQKF9Ra4lH2TQSDwVOK3pUYiUQCnU4H/X4f5XIZpVIJjuOg2+26vaWOrG0N5XGMNREsy8JsNkMul/NqPCLm8zmKxaJXE3LSZxWzAouf66JqtYper4doNOrV5A6HwyHq9bpXU7RVzAoUJ9lYLEWmaboT5vN5z2gYhjthoVDwahzkh9RUzAp8JscUvJFuaDweR7vddieqVCruPQ4GA/depacC5cc8AfCrmE3I26PgkcJvMSSTSdi2jdFohMlkgkajgXQ6vQxz+C7/TrYNPP4lDaaYxCx3J5Q9P/jF9YU8U/Ldod7lDc06A++5XJFHqr2HwOf7BUx7SGrlYIjVAAAAAElFTkSuQmCC">
+                        <span class="spanPass">Mostrar</span>
+                    </div>
+                    <div class="togglePassword" id="hidePassword" style="display:none">
+                        <img class="imgShowPass" alt="Mostrar / Ocultar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS42/U4J6AAAAdpJREFUOE/dkj2LWkEUhs0maUJYUgU2RYpU+QGBNPkbkl/gN34laKFcrERkWRA2aBDs0t5G0CaF1RbCghDBr/jdqFUkYiOu775nGPUuKqTdvHC4c2fO+8yZOWP7P+V2u187nc4v5XL5XE/9m2h64fF43vH7SUKP3zocjl/hcBjz+bwF4Eynn5bP53vjcrmuaB7TfMeKICFjzv0V2Gg0wmaz+UngE207VCKROCPIS9MfBvx+P0qlEsbjMdrtNgKBAAQ2HA7VfzQaTdB2HEjYM0KuBSTBKpVptVqhWq0imUwq2GAwQKPRUJvp3O9SiMbsxQX3FiaRzWaxXq+RyWTUv8D6/T5PCBQKhV2eDp/G7MXJ39akYrGI6XQKNgLBYBDdbhf1eh3L5RKVSsUKk7jVmL144d+sSfl8HqlUCqFQCL1eT8EMw1BXYJqmFbah19CYvXgn51y8sSTuKpvNZsjlcqo5i8UCkUhkl8Mmmvw+15iH8nq9L7n4YwvrdDrqiFtNJhOk0+ktbM24lGZq+6F0lRV5Hq1WC7VaTXU7FoshHo9LNfIWV8wpMT5o22kx6TObsGw2m/JoTe7+noCvjCzXruWNcnzB1NOP2Sq73f6UkFeEfeQJj9/LI5fNdg9krYBlErAgygAAAABJRU5ErkJggg==">
+                        <span class="spanPass">Ocultar</span>
+                    </div>
+                    <div>
+                        <input type="password" id="pass" class="form-group inputLog" required name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{8,}" title="La contraseña debe contener como mínimo 8 caracteres, incluyendo una letra minúscula, una letra mayúscula y un número" placeholder="Introduce una contraseña válida" />
+                    </div>
+                </div>
+                <br />
+                <h4 style="color:red; text-align:center">@ViewBag.Error</h4>
+                <div class="buttonDiv">
+                    <button type="submit" id="sub" class="btn button btnLog">Registrarme</button>
+                    <p class="comeBack center">O... &nbsp;@Html.ActionLink("Volver al Acceso", "SignIn")</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

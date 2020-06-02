@@ -1,0 +1,26 @@
+﻿@using ProyectoCoreLauraSanNicolas.Models
+@model List<Product>
+@{
+    ViewBag.Title = "Forex";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+<br />
+<h2 class="title">Forex</h2>
+<br />
+<div class="div">
+    <form class="divContent">
+        <h6 class="rawMaterialForm">Escoge la divisa que quieras ver:</h6>
+        <div class="select">
+            <select id="products" name="symbolName">
+                @foreach (Product prod in Model)
+                {
+                    <option value="@prod.Code">@prod.Name</option>
+                }
+            </select>
+        </div>        
+    </form>
+</div>
+<partial name="_StockTable"/>
